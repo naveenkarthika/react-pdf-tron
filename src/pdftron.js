@@ -16,8 +16,7 @@ const PDFTron = () => {
     var bytes = base64.decode(getParams);
     var text = utf8.decode(bytes);
     console.log('text',text);
-    const fileExtension = text && text.match(/\.(pdf|doc|docx|xlxs)$/i);
-
+    const fileExtension = text && text.match(/\.(pdf|doc|docx|xlxs)/g);
     
     useEffect(() => {
         WebViewer({
@@ -101,7 +100,7 @@ const PDFTron = () => {
                             console.log('Child IFrame', obj);
                         }
                     });
-                    annotationManager.deleteAnnotation(annotation);               
+                    annotationManager.deleteAnnotation(annotation);             
                 };
             }
         }).catch((error) => {
