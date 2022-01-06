@@ -9,7 +9,7 @@ const App = () => {
     <div className="App">
       <Routes>
         <Route path="/" element={<PDFTron />} />
-        <Route path="/?pdf_url=" element={<PDFTron />} />
+        <Route path="/:pdf_url" element={<PDFTron />} />
       </Routes>
     </div>
   );
