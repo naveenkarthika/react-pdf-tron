@@ -15,6 +15,7 @@ const PDFTron = () => {
     // base 64 decoded
     var bytes = base64.decode(getParams);
     var text = utf8.decode(bytes);
+    console.log('text',text);
     const fileExtension = text && text.match(/\.(pdf|doc|docx|xlxs)$/i);
 
     
