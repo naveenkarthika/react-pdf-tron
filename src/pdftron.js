@@ -9,11 +9,12 @@ const PDFTron = () => {
     const viewer = useRef(null);
     const queryParams = new URLSearchParams(useLocation().search);
     const getParams = queryParams && queryParams.get('pdf_url');
-    var fileExtension = getParams && getParams.match(/\.(pdf|doc|docx|xlxs)$/i);
+    const fileExtension = getParams && getParams.match(/\.(pdf|doc|docx|xlxs)$/i);
+    console.log('getParams',getParams)
     //Decrypt
     const secret = '346FGDS$#@*HYF';
-    const decodedUrl = getParams && CryptoJS.AES.decrypt(secret, getParams);
-    const originalUrl = decodedUrl && decodedUrl.toString(CryptoJS.enc.Utf8);
+    const decodedUrl =  CryptoJS.AES.decrypt(secret, getParams);
+    const originalUrl = decodedUrl.toString(CryptoJS.enc.Utf8);
     console.log('originalUrl',originalUrl)
     useEffect(() => {
         WebViewer({
