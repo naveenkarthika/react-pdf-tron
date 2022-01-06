@@ -3,6 +3,9 @@ import WebViewer from '@pdftron/webviewer';
 import './App.css';
 import { useLocation } from 'react-router-dom'
 const CryptoJS = require("crypto-js");
+const base64 = require('base-64');
+const utf8 = require('utf8');
+
 
 
 const PDFTron = () => {
@@ -11,15 +14,34 @@ const PDFTron = () => {
     const getParams = queryParams && queryParams.get('pdf_url');
     const fileExtension = getParams && getParams.match(/\.(pdf|doc|docx|xlxs)$/i);
     console.log('getParams',getParams)
+
+    // let url = `https://esquiretek-private-asset-staging.s3-accelerate.amazonaws.com/DefSROGS1toPlt0927211_3S3LIBLT.pdf?AWSAccessKeyId=ASIA37ZFJDY4LRBEGHE7&Expires=1641491917&Signature=a2AcadHaMJSadXCyncFMmYcBo0I%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEKH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIGPt8wvDMVJZabYigfHNyw2dCPqhAabivwckRou1upciAiA%2F75reIbZJ220ltjwMJr5Hl34z8PpDcObZ7ZOm2eN41CqhAgiq%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAEaDDgyNDE3NTA0MjEwNCIMJjNdDnJE0BSpvqiTKvUBIfiFVyKYd5fTc2FhTaaq5LuQ%2BD7r9Wuzk5Wjg89Zj7zIpCR5vy1snpG0Lm5TGsHadzoxkoaHuFo%2Fa6nca4og8u6KKNIGuqXkn9a1T7AdP8aVxk0iTUv4zTXwvsDqPDZrLE5kXVS4BzkIsfT5mwwv0txNzOYPRd4sHOBGyjWBoYqgIpnOOiTW6pVOj7Y2mySMv16o8L10fsqMtBnE3XOZKfru0qmGQhEmje6rhSC1aeWG%2BNYmGmKbHV%2FOjwOmn%2FCCMmGCY9y8CUfXl3Xc4pkgb3FNPdHn7jCkzJ56ozYPCFYb7NhqDjNgrOSvc7RgNoOgiKGgfI8w47ncjgY6mwGA1TUzbGHxKiSRZqovW72X1w0znaPH9H4gwKwboIoVuYvuJa7yCsywOjWpLk5ZdJ7F%2BIUoiJdBhGhkORkdoBZ8jBP94B9DV8KjmgRgp76PYCanqP1DGrhUcDYA%2BqbvKvlVmI3AMyMZ09WDodi6eTn7uqHWgpX10BGsk1cV221F%2FZj5tUxK%2BSwuS8H0B4Zq0CfhQIATP5XqrDKHsw%3D%3D`
+
     //Decrypt
-    const secret = '346FGDS$#@*HYF';
-    const decodedUrl =  CryptoJS.AES.decrypt(secret, getParams);
-    const originalUrl = decodedUrl.toString(CryptoJS.enc.Utf8);
-    console.log('originalUrl',originalUrl)
+    // const secret = '346FGDSwtewetwetHYF';
+    // const decodedUrl =  CryptoJS.AES.decrypt(secret, getParams);
+    // const originalUrl = decodedUrl.toString(CryptoJS.enc.Utf8);
+
+    // base 64 decoded
+    var bytes = base64.decode(getParams);
+    var text = utf8.decode(bytes);
+
+    console.log('text',text)
+
+
+    // if(url){
+    //     var ciphertext = CryptoJS.AES.encrypt(secret, url).toString();
+    //     console.log('ciphertext',ciphertext)
+    //     var decoded =  CryptoJS.AES.decrypt(secret, ciphertext);
+    //     var originalText  = decoded && decoded.toString(CryptoJS.enc.Utf8);
+    //     console.log('original',originalText )
+    // }
+
+    
     useEffect(() => {
         WebViewer({
             path: "/webviewer/lib/",
-            initialDoc: `${originalUrl}`,
+            initialDoc: text,
             fullAPI: true,
             disableLogs: true,
             useDownloader: false

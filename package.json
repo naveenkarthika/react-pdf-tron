@@ -5,11 +5,13 @@
   "homepage": "https://pdftron.github.io/webviewer-react-sample",
   "dependencies": {
     "@pdftron/webviewer": "^8.2.0",
+    "base-64": "^1.0.0",
     "crypto-js": "^4.1.1",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-router-dom": "^6.2.1",
-    "react-scripts": "^2.1.1"
+    "react-scripts": "^2.1.1",
+    "utf8": "^3.0.0"
   },
   "devDependencies": {
     "btoa": "^1.2.1",
